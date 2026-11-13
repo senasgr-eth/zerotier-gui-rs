@@ -143,8 +143,15 @@ network history in `src/history.rs`.
 - Tags matching `v*` produce downloadable archives for Linux, macOS and
   Windows (`.github/workflows/release.yml`).
 
-No distribution-specific package (`.deb`, `.rpm`, …) is produced by this
-repository. The Linux archive contains the binary, desktop entry and icon.
+The Linux release includes a portable `.tar.gz` and a Debian/Ubuntu `.deb`.
+The package installs the binary, desktop entry and a full hicolor icon set.
+
+Build the package locally after `cargo build --release`:
+
+```sh
+packaging/linux/build-deb.sh
+sudo apt install ./dist/zerotier-gui_*.deb
+```
 
 ## Credits and license
 

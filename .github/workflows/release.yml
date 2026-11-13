@@ -53,12 +53,14 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           rm -rf dist
-          mkdir -p dist/zerotier-gui
+          mkdir -p dist/zerotier-gui/icons
           cp target/release/zerotier-gui dist/zerotier-gui/
           cp packaging/linux/zerotier-gui.desktop dist/zerotier-gui/
-          cp img/zerotier-gui.png dist/zerotier-gui/
+          cp -r packaging/linux/icons/hicolor dist/zerotier-gui/icons/
+          cp packaging/linux/debian-copyright dist/zerotier-gui/
           cp LICENSE NOTICE README.md dist/zerotier-gui/
           tar -C dist -czf zerotier-gui-${{ matrix.name }}.tar.gz zerotier-gui
+          packaging/linux/build-deb.sh
 
       - name: Package (macOS)
         if: runner.os == 'macOS'
@@ -90,6 +92,7 @@ jobs:
           path: |
             zerotier-gui-*.tar.gz
             zerotier-gui-*.zip
+            zerotier-gui_*.deb
           if-no-files-found: error
 
   release:
