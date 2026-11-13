@@ -1,0 +1,26 @@
+ZeroTier-GUI
+============
+
+Copyright (C) 2023 Tomás Ralph <https://github.com/tralph3>
+  Original Python/Tkinter implementation, feature set and interface design.
+
+Copyright (C) 2026 Senasgr <https://github.com/senasgr-eth>
+  Rust + GPUI rewrite, cross-platform packaging and CI.
+
+This project is an independent rewrite of ZeroTier-GUI. It is not a fork of
+the upstream repository's ongoing development: the original project has been
+dormant for several years, so this rewrite preserves the same idea and feature
+set while replacing the implementation with Rust and GPUI.
+
+The original project and this rewrite are free software: you can redistribute
+them and/or modify them under the terms of the GNU General Public License as
+published by the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version. See LICENSE for the full text.
+
+If you redistribute this program, or a modified version of it, you must keep
+the GPL license, make the corresponding source available, and preserve the
+copyright and attribution notices above. You may credit yourself for your own
+contributions, but you may not claim that the original work was created by you.
+
+ZeroTier is a trademark of ZeroTier, Inc. This project is unofficial and is
+not affiliated with or endorsed by ZeroTier, Inc.

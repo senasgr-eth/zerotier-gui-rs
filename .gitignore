@@ -1,0 +1,7 @@
+/target
+/dist
+*.deb
+*.rpm
+*.zip
+*.tar.gz
+.DS_Store

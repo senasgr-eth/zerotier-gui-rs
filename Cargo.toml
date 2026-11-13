@@ -1,0 +1,30 @@
+[package]
+name = "zerotier-gui"
+version = "2.0.0"
+edition = "2024"
+rust-version = "1.88"
+authors = ["Senasgr"]
+description = "An unofficial cross-platform front-end for ZeroTier, written in Rust with GPUI"
+license = "GPL-3.0-or-later"
+repository = "https://github.com/senasgr-eth/zerotier-gui-rs"
+homepage = "https://github.com/senasgr-eth/zerotier-gui-rs"
+readme = "README.md"
+keywords = ["zerotier", "vpn", "gui", "gpui"]
+categories = ["gui", "network-programming"]
+
+[dependencies]
+gpui = "0.2.2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+chrono = { version = "0.4", default-features = false, features = ["clock"] }
+open = "5"
+
+# gpui 0.2.2 -> zed-async-tar -> xattr 0.2.3 references libc::ENOATTR, which
+# libc 0.2.186 removed on Linux. Pin the last compatible release until xattr is
+# updated (or gpui stops pulling it in).
+libc = "=0.2.185"
+
+[profile.release]
+opt-level = 2
+lto = "thin"
+strip = true
