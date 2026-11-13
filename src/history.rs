@@ -45,14 +45,40 @@ impl HistoryEntry {
 
 pub type NetworkHistory = BTreeMap<String, HistoryEntry>;
 
-pub fn directory() -> PathBuf {
-    let data_home = std::env::var_os("XDG_DATA_HOME")
-        .map(PathBuf::from)
-        .filter(|path| path.is_absolute())
-        .or_else(|| std::env::var_os("HOME").map(|home| PathBuf::from(home).join(".local/share")))
-        .unwrap_or_else(|| PathBuf::from(".local/share"));
+fn base_data_dir() -> PathBuf {
+    #[cfg(target_os = "linux")]
+    {
+        std::env::var_os("XDG_DATA_HOME")
+            .map(PathBuf::from)
+            .filter(|path| path.is_absolute())
+            .or_else(|| {
+                std::env::var_os("HOME").map(|home| PathBuf::from(home).join(".local/share"))
+            })
+            .unwrap_or_else(|| PathBuf::from(".local/share"))
+    }
 
-    data_home.join("zerotier-gui")
+    #[cfg(target_os = "macos")]
+    {
+        std::env::var_os("HOME")
+            .map(|home| PathBuf::from(home).join("Library/Application Support"))
+            .unwrap_or_else(|| PathBuf::from("."))
+    }
+
+    #[cfg(target_os = "windows")]
+    {
+        std::env::var_os("LOCALAPPDATA")
+            .map(PathBuf::from)
+            .unwrap_or_else(|| PathBuf::from("."))
+    }
+
+    #[cfg(not(any(target_os = "linux", target_os = "macos", target_os = "windows")))]
+    {
+        PathBuf::from(".local/share")
+    }
+}
+
+pub fn directory() -> PathBuf {
+    base_data_dir().join("zerotier-gui")
 }
 
 pub fn file_path() -> PathBuf {
