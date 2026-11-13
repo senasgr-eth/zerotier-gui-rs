@@ -93,6 +93,11 @@ sudo dnf install gcc gcc-c++ libxkbcommon-devel libxcb-devel
 sudo pacman -S base-devel libxkbcommon libxcb
 ```
 
+At runtime the binary needs `libxkbcommon0`, `libxkbcommon-x11-0` and `libxcb1`
+(installed automatically by the build packages above). GPUI renders through
+Vulkan, so make sure your GPU driver provides Vulkan; on Debian/Ubuntu the
+Mesa software fallback is `mesa-vulkan-drivers`.
+
 ### macOS
 
 Install the Xcode command line tools, then:
