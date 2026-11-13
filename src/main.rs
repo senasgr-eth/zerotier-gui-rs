@@ -4,7 +4,7 @@
 // Based on the original ZeroTier-GUI by Tomás Ralph (GPL-3.0-or-later).
 // See NOTICE and LICENSE for attribution and licensing details.
 
-#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+#![cfg_attr(all(windows, not(debug_assertions)), windows_subsystem = "windows")]
 
 //! ZeroTier-GUI: a Linux front-end for ZeroTier, written in Rust with GPUI.
 
